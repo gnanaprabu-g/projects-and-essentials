@@ -1,0 +1,1 @@
+Your ETL script suddenly starts failing after a schema change. How would you handle dynamic columns ?
