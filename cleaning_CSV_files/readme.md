@@ -1,0 +1,1 @@
+A CSV file contains corrupted rows. How would your Python script skip bad records while logging errors ?

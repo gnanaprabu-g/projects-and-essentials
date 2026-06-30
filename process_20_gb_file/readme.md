@@ -1,0 +1,1 @@
+How would you process a 20GB file without loading everything into memory ?
