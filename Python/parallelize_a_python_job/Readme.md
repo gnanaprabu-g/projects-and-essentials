@@ -1,1 +1,0 @@
-How would you parallelize a Python job that processes millions of records ?
