@@ -1,0 +1,1 @@
+Python program to count the frequency of each element in a list.
