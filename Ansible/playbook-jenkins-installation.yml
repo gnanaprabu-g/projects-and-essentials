@@ -1,0 +1,44 @@
+- hosts: jenkins
+  remote_user: ec2-user
+  become: yes
+  roles:
+    - jenkins
+
+
+# <role_name>/tasks/main.yml
+---
+- name: Add Jenkins repo
+  yum_repository:
+    name: jenkins
+    description: Adding repo
+    baseurl: https://pkg.jenkins.io/rpm-stable
+    gpgkey: https://pkg.jenkins.io/rpm-stable/repodata/repomd.xml.key
+- name: Install Java & Jenkins
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - java-21-amazon-corretto
+    - jenkins
+- name: Start Jenkins server
+  service:
+    name: jenkins
+    state: started
+- name: Change Jenkins port number to 8081
+  lineinfile:
+    path: /usr/lib/systemd/system/jenkins.service
+    regexp: '^Environment'
+    line: 'Environment="JENKINS_PORT=8081"'
+  notify:
+    - Ensure system daemaon reloaded
+    - Restart Jenkins
+
+
+# <role_name>/handlers/main.yml
+- name: Ensure system daemaon reloaded
+  systemd:
+    daemon_reload: yes
+- name: Restart Jenkins
+  service:
+    name: jenkins
+    state: restarted

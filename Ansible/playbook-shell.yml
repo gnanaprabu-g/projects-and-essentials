@@ -1,0 +1,15 @@
+- hosts: play
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - name: Copy files
+    copy:
+      src: /home/ec2-user/index.html
+      dest: /var/www/html/index.html
+      mode: 0644
+  - name: Display server uptimes
+    shell: /usr/bin/uptime
+    register: test_var
+  - name: Display stored variable
+    debug:
+      var: test_var

@@ -1,0 +1,13 @@
+- hosts: play
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - name: Install set of packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - httpd
+      - mysql
+      - java
+      - abc

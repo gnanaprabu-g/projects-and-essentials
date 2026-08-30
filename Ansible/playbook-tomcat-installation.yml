@@ -1,0 +1,53 @@
+- hosts: tomcat
+  remote_user: ec2-user
+  become: yes
+  roles:
+    - tomcat
+
+# <role_name>/tasks/main.yml
+- name: Install java-21-amazon-corretto
+  yum:
+    name: java-21-amazon-corretto
+    state: present
+- name: Download Tomcat zip file
+  get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.121/bin/apache-tomcat-9.0.121.zip
+    dest: /opt/apache-tomcat-9.0.121.zip
+    mode: '0777'
+- name: Extract Tomcat zip file
+  unarchive:
+    src: /opt/apache-tomcat-9.0.121.zip
+    dest: /opt
+    remote_src: yes
+- name: Delete Tomcat zip file
+  shell: rm -rf /opt/apache-tomcat-9.0.121.zip
+- name: Set Execute Permission for bin directory
+  shell:
+    cmd: chmod +x -R bin
+    chdir: /opt/apache-tomcat-9.0.121/
+- name: Set Write Permission for server.xml file
+  shell:
+    cmd: chmod 666 conf/server.xml
+    chdir: /opt/apache-tomcat-9.0.121/
+- name: Change Port number for Tomcat server to 8083
+  lineinfile:
+    path: /opt/apache-tomcat-9.0.121/conf/server.xml
+    regexp: '^    <Connector port="8080" protocol="HTTP/1.1"'
+    line: '    <Connector port="8083" protocol="HTTP/1.1"'
+  notify:
+    - Shutdown Tomcat
+    - Startup Tomcat
+- name: Startup Tomcat
+  shell:
+    cmd: ./startup.sh
+    chdir: /opt/apache-tomcat-9.0.121/bin
+
+# <role_name>/handlers/main.yml
+- name: Shutdown Tomcat
+  shell:
+    cmd: ./shutdown.sh
+    chdir: /opt/apache-tomcat-9.0.121/bin
+- name: Startup Tomcat
+  shell:
+    cmd: ./startup.sh
+    chdir: /opt/apache-tomcat-9.0.121/bin

@@ -1,0 +1,9 @@
+- hosts: debug
+  remote_user: ec2-user
+  become: yes
+  vars_files:
+    - user.txt
+  tasks:
+  - name: Print the content from variable file
+    debug:
+      msg: I am {{ username }} and my password is {{ password }}

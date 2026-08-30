@@ -1,0 +1,27 @@
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+  roles:
+    - <role_name>
+
+
+# <role_name>/tasks/main.yml
+---
+- name: Install Apache web server
+  yum:
+    name: httpd
+    state: present
+- name: Copy files to remote
+  copy: 
+    src: /home/ec2-user/apache/files/index.html
+    dest: /var/www/html/index.html
+    mode: 0644
+- name: Start Apache server
+  service:
+    name: httpd
+    state: started
+
+# <role_name>/files/index.html
+Hello world !!
+
+We have implemented roles using Ansible !!!

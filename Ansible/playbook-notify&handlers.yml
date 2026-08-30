@@ -1,0 +1,30 @@
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+  vars: 
+    port: 8800
+  tasks:
+  - name: Checking notify and handlers > Installing Apache server
+    yum: 
+      name: httpd
+      state: present
+  - name: Starting Apache service
+    service:
+      name: httpd
+      state: started
+  - name: Copying html file from ctrl node to managed nodes
+    copy:
+      src: /home/ec2-user/index.html
+      dest: /var/www/html/index.html
+      mode: 0644
+  - name: Changing Port number for Apache server
+    lineinfile: 
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^Listen'
+      line: 'Listen {{port}}'
+    notify: Restart
+  handlers:
+  - name: Restart
+    service:
+      name: httpd
+      state: restarted
