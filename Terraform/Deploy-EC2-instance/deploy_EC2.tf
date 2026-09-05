@@ -13,8 +13,8 @@ terraform {
 
 provider "aws" {
   region = "ap-south-1"
-#access_key = "access-key-from-IAM"
-#secret_key = "secret-key-from-IAM"
+#  access_key = "access-key-from-IAM"
+#  secret_key = "secret-key-from-IAM"
 }
 
 data "aws_ami" "amazon-linux" {
