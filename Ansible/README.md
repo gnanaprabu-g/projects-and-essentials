@@ -93,7 +93,7 @@ ansible-vault decrypt user.txt
 
 
 # Roles commands - code resuablity
-ansible galaxy init role_name
+ansible-galaxy init role_name
 
 sudo yum install tree -y
 
