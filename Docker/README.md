@@ -43,11 +43,11 @@ docker images -a
 # creating online backup of "webapp-image"
 docker login
 
-docker tag webapp-image gnanaprabu\custom-image
+docker tag webapp-image gnanaprabu/custom-image
 
 docker images -a
 
-docker push gnanaprabu\custom-image
+docker push gnanaprabu/custom-image
 
 # creating image from Dockerfile
 docker build -t custom-webapp-image .
