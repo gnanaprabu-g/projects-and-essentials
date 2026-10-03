@@ -34,7 +34,7 @@ Lets create resources with required parameters in the below order:
     3. instance_type
     4. key_pair
         1. generate public and private keys using below command in linux
-            `ssh-keygen -t rsa -b 4096`
+            1. `ssh-keygen -t rsa -b 4096`
         2. pass public key (/root/.ssh/id_rsa.pub) contents to "public_key" parameter in "aws_key_pair" creation block
         3. retain private key (/root/.ssh/id_rsa) as "key.pem" file in local
     5. security_group_name
