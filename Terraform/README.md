@@ -1,3 +1,5 @@
+# Basic Commands
+
 terraform fmt
 
 terraform init
