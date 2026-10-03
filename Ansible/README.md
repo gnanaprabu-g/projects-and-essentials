@@ -16,30 +16,20 @@ yum install python-pip -y
 # At control node
 1. vim inv.txt
 
+```bash
 [apache]
-
 10.1.17.28
-
 100.23.12.1
-
 [abc]
-
 22.31.200.82
-
 [debug]
-
 210.34.52.114
-
 152.62.84.7
-
 [play]
-
 41.27.152.28
-
 97.53.74.118
-
 156.77.61.146
-
+```
 
 Note: These can be Public IP or Private IP of managed EC2 servers.
 
