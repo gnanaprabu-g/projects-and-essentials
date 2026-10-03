@@ -4,6 +4,7 @@ Put the above dag files in "airflow/dags/" folder to create a DAG in Airflow UI.
 
 1. Setup virtual environment using python3  
 ```bash
+sudo apt install python3-venv
 mkdir workspace_folder
 cd workspace_folder
 python3 -m venv airflow-venv
