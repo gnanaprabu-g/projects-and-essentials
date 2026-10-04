@@ -14,11 +14,11 @@ def hello2():
     print("Hello from Task-2")
 
 task1 = PythonOperator(task_id="Task-1", 
-                       python_callable="hello", 
+                       python_callable=hello, 
                        dag=dag1)
 
 task2 = PythonOperator(task_id="Task-2", 
-                       python_callable="hello2", 
+                       python_callable=hello2, 
                        dag=dag1)
 
 task1 >> task2
