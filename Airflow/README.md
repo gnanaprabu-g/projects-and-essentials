@@ -22,6 +22,8 @@ source airflow-venv/bin/activate
 9. `pkill --signal 9 -u root airflow`  
 10. Check if all the process stopped,  
 11. `ps -ef | grep airflow`  
+12. Add below line to `/etc/fstab` file. This will bind mount the custom os directory to airflow/dags directory
+13. `/mnt/d/Documents/Learning/projects-and-essentials/Airflow/dags  /root/airflow/dags  none  defaults,bind,nofail  0  0`
 
 
 # PostgreSQL container Setup  
