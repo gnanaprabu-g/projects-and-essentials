@@ -37,7 +37,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                dir('projects-and-essentials/CICD Project') {
+                    // Pulls down the repository configured in the Jenkins job UI into this folder
+                    checkout scm
+                }
             }
         }
 
